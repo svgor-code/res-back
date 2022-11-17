@@ -1,73 +1,43 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## О проекте
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Проект представляет собой административную панель, для контролирования работы ресторана.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Основные функции проекта:
+ - Ведение статистики по заказам
+ - Отображение работы ресторана в режиме реального времени (заказы, кухня, доставка).
+ - Ведение списка сотрудников
+ - Ведение списка заказов
+ - Контроль бронирования столиков
+ - Контроль над выполнением заказов
+ - Отслеживание статуса доставок
+ - Формирование меню
+ - Учет количества продукции
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Запуск проекта
 
-## Installation
+1. Клонируем проект ```git clone https://github.com/progitpro/platform-front.git```
+2. нужно описание того, как запускать используя докер @qlmanlp
 
-```bash
-$ npm install
-```
+## Дизайн проекта
 
-## Running the app
+https://www.figma.com/file/SomEc4Ummmxxq1yIjIDAmU/Spoon-Restaurant-SAAS-Dashboard?node-id=86%3A170
 
-```bash
-# development
-$ npm run start
+## Правила работы с git
 
-# watch mode
-$ npm run start:dev
+1. Получая новую задачу создаем под неё ветку от dev.
+  - 1.1 Переходим на ветку dev ```git checkout dev```
+  - 1.2 Получаем и мержим в ветку последние изменения ```git pull origin dev``` или просто ```git pull```
+  - 1.3 Создаем ветку от ветки dev ```git checkout -b <название новой ветки>```
+  - 1.4 Название новой ветки должно быть коротким и одновременно отражать суть задачи. Если задача направлена на добавление чего-то нового, в назание ветки указываем префикс ```feature/```. Например, получили задачу ```Добавить левое меню на страницу ордеров```, название ветки можно задать такое: ```feature/orders-left-menu```
 
-# production mode
-$ npm run start:prod
-```
+2. После создания ветки начинаем проводить работу.
 
-## Test
+3. По окончанию работ создаем commit с вашими изменениями ```git add .``` -> ```git commit -m "Краткое описание проведенных работ"```
 
-```bash
-# unit tests
-$ npm run test
+4. После создания commit, получаем новые изменения из ветки dev (пока вы работали, в ветке dev что-то могло измениться). Выполняем команду ```git pull origin dev```. Эта команда смержит в вашу девку актуальные изменения из ветки dev.
 
-# e2e tests
-$ npm run test:e2e
+5. Если после мержа ветки dev у вас возникли какие-либо конфликты, решайте их и снова делайте commit (пункт 3).
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+6. После всех шагов выше выполняете команду ```git push```, если вашей ветки еще нет в репозитории, git предложит вам иную команду, которая позволит создать ветку в удаленном репозитории, в таком случае выполняем её.
+  

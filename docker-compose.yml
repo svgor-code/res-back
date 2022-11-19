@@ -5,7 +5,15 @@ volumes:
   mysql:
 services:
   node:
-     build: .
+    build: 
+      context: ./
+      dockerfile: docker/node/Dockerfile
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app/
+    ports:
+      - 8080:8080
   mysql:
     image: mysql
     environment: 

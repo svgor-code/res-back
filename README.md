@@ -19,8 +19,6 @@
 1. Клонируем проект ```git clone https://github.com/progitpro/platform-front.git```
 2. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
    ```docker-compose up --build --pull```
-3. После КАЖДОГО изменения в проекте, вводим команду
-```docker-compose up --build ``` 
 
 ## Дизайн проекта
 

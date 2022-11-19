@@ -18,7 +18,16 @@
 
 1. Клонируем проект ```git clone https://github.com/progitpro/platform-front.git```
 2. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
-   ```docker-compose up --build --pull```
+   ```docker-compose build --pull && docker-compose up -d```
+   
+## Команды докера
+1. Для просмотра логов:
+   ```docker-compose logs -f```
+2. Просмотреть активные контейнеры:
+   ```docker ps```
+3. Остановить все запущенные контейнеры (команду выполнять из директории с docker-compose.yml):
+   ```docker-compose down```
+
 
 ## Дизайн проекта
 

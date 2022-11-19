@@ -1,0 +1,20 @@
+version: '3.8'
+
+volumes:
+  node_modules:
+  mysql:
+services:
+  node:
+    build: 
+      context: ./
+      dockerfile: docker/node/Dockerfile
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app/
+    ports:
+      - 8080:8080
+  mysql:
+    image: mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: 'password'

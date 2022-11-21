@@ -17,15 +17,20 @@
 ## Запуск проекта
 
 1. Клонируем проект ```git clone https://github.com/progitpro/platform-front.git```
-2. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
+2. Добавляем переменные окружения ```cp .env.sample .env```
+3. Устанавливаем зависимости локально ```npm install```
+3. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
    ```docker-compose build --pull && docker-compose up -d```
-   
+4. Применяем миграции: ```npx prisma migrate dev```
+
 ## Команды докера
+(команды выполнять из директории с docker-compose.yml)
+
 1. Для просмотра логов:
    ```docker-compose logs -f```
 2. Просмотреть активные контейнеры:
    ```docker ps```
-3. Остановить все запущенные контейнеры (команду выполнять из директории с docker-compose.yml):
+3. Остановить все запущенные контейнеры:
    ```docker-compose down```
 
 

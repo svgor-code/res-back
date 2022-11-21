@@ -1,8 +1,5 @@
 version: '3.8'
 
-volumes:
-  node_modules:
-  mysql:
 services:
   node:
     build: 
@@ -11,10 +8,18 @@ services:
     depends_on:
       - mysql
     volumes:
-      - .:/app/
+      - .:/app
+      - node_modules:/app/node_modules
     ports:
       - 8080:8080
   mysql:
-    image: mysql
-    environment: 
+    image: mysql:8.0.31
+    environment:
       MYSQL_ROOT_PASSWORD: 'password'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+volumes:
+  mysql:
+  node_modules:

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
-import { CreateOrderDto } from 'src/modules/Orders/dto/create-order.dto';
-import { UpdateOrderDto } from 'src/modules/Orders/dto/update-order.dto';
-import { IOrder } from 'src/modules/Orders/interfaces/order';
+import { CreateOrderDto } from 'src/dto/create-order.dto';
+import { UpdateOrderDto } from 'src/dto/update-order.dto';
+import { IOrder } from 'src/interfaces/order';
 import { OrdersService } from 'src/services/orders.service';
 
 @Controller('orders')

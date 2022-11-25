@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrderDto } from '../dto/create-order.dto';
-import { UpdateOrderDto } from '../dto/update-order.dto';
-import { IOrder } from '../interfaces/order';
+import { CreateOrderDto } from 'src/modules/Orders/dto/create-order.dto';
+import { UpdateOrderDto } from 'src/modules/Orders/dto/update-order.dto';
+import { IOrder } from 'src/modules/Orders/interfaces/order';
 
 @Injectable()
 export class OrdersService {
@@ -14,39 +14,39 @@ export class OrdersService {
   getOne(id: number) {
     const foundOrder = this.orders.find(
       (order: IOrder) => order.id === id
-    )
+    );
     return foundOrder
   }
 
   create(order: CreateOrderDto) {
-    const id = Math.random() * 100
+    const id = Math.random() * 100;
     const newOrder = {
       id,
       inProcess: false,
       ...order,
-    }
-    this.orders.push(newOrder)
+    };
+    this.orders.push(newOrder);
     return newOrder
   }
 
   update(id: number, order: UpdateOrderDto) {
-    const updateOrder = this.getOne(id)
+    const updateOrder = this.getOne(id);
     if(!updateOrder) return
 
-    const newOrder = Object.assign(updateOrder, order)
-    const index = this.orders.indexOf(updateOrder)
-    this.orders[index] = newOrder
+    const newOrder = Object.assign(updateOrder, order);
+    const index = this.orders.indexOf(updateOrder);
+    this.orders[index] = newOrder;
 
     return newOrder
   }
 
   delete(id: number) {
-    const deleteOrder = this.getOne(id)
+    const deleteOrder = this.getOne(id);
     if(!deleteOrder) return
 
     this.orders = this.orders.filter(
       (order: IOrder) => order.id !== id
-    )
+    );
     return deleteOrder
   }
 }

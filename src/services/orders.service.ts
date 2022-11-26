@@ -5,17 +5,15 @@ import { IOrder } from 'src/interfaces/order';
 
 @Injectable()
 export class OrdersService {
-  private orders: IOrder[] = []
+  private orders: IOrder[] = [];
 
   getAll() {
-    return this.orders
+    return this.orders;
   }
 
   getOne(id: number) {
-    const foundOrder = this.orders.find(
-      (order: IOrder) => order.id === id
-    );
-    return foundOrder
+    const foundOrder = this.orders.find((order: IOrder) => order.id === id);
+    return foundOrder;
   }
 
   create(order: CreateOrderDto) {
@@ -26,27 +24,25 @@ export class OrdersService {
       ...order,
     };
     this.orders.push(newOrder);
-    return newOrder
+    return newOrder;
   }
 
   update(id: number, order: UpdateOrderDto) {
     const updateOrder = this.getOne(id);
-    if(!updateOrder) return
+    if (!updateOrder) return;
 
     const newOrder = Object.assign(updateOrder, order);
     const index = this.orders.indexOf(updateOrder);
     this.orders[index] = newOrder;
 
-    return newOrder
+    return newOrder;
   }
 
   delete(id: number) {
     const deleteOrder = this.getOne(id);
-    if(!deleteOrder) return
+    if (!deleteOrder) return;
 
-    this.orders = this.orders.filter(
-      (order: IOrder) => order.id !== id
-    );
-    return deleteOrder
+    this.orders = this.orders.filter((order: IOrder) => order.id !== id);
+    return deleteOrder;
   }
 }

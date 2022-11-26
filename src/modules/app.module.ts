@@ -5,8 +5,8 @@ import { OrdersModule } from 'src/modules/orders.module';
 import { UserModule } from 'src/modules/user.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, OrdersModule, UserModule],
+  imports: [OrdersModule, UserModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

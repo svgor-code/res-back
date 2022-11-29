@@ -1,6 +1,9 @@
+import { OrderStatusEnum } from '@prisma/client'
+
 export class UpdateOrderDto {
-  title: string;
-  image: string;
-  inProcess: boolean;
-  timeLeft: number;
+  id: number;
+  status: OrderStatusEnum;
+  persons: number;
+  createdAt: string | Date;
+  updatedStatusAt: string | Date;
 }

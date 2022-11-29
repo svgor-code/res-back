@@ -12,24 +12,25 @@ import { CreateOrderDto } from 'src/dto/create-order.dto';
 import { UpdateOrderDto } from 'src/dto/update-order.dto';
 import { IOrder } from 'src/interfaces/order';
 import { OrdersService } from 'src/services/orders.service';
+import { Order, Order as OrderModel, OrderStatusEnum } from '@prisma/client'
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private ordersService: OrdersService) {}
+  constructor(private readonly ordersService: OrdersService) {}
 
   @Get(':id')
-  async get(@Param('id') id: number): Promise<IOrder> {
-    return this.ordersService.getOne(id);
+  async get(@Param('id') id: string): Promise<OrderModel> {
+    return this.ordersService.getOne({ id: +id});
   }
 
   @Get()
-  async findAll(): Promise<IOrder[]> {
-    return this.ordersService.getAll();
+  async findAll(): Promise<OrderModel[]> {
+    return this.ordersService.getAll({});
   }
 
   @Post()
   @HttpCode(204)
-  async create(@Body() createOrderDto: CreateOrderDto): Promise<IOrder> {
+  async create(@Body() createOrderDto: CreateOrderDto): Promise<OrderModel> {
     return this.ordersService.create(createOrderDto);
   }
 
@@ -38,13 +39,16 @@ export class OrdersController {
   async update(
     @Param('id') id: number,
     @Body() updateOrderDto: UpdateOrderDto,
-  ): Promise<IOrder> {
-    return this.ordersService.update(id, updateOrderDto);
+  ): Promise<OrderModel> {
+    return this.ordersService.update({
+      where: { id: +id},
+      data: updateOrderDto
+    });
   }
 
   @Delete(':id')
   @HttpCode(204)
-  async delete(@Param('id') id: number): Promise<IOrder> {
-    return this.ordersService.delete(id);
+  async delete(@Param('id') id: string): Promise<OrderModel> {
+    return this.ordersService.delete({ id: +id });
   }
 }

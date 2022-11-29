@@ -9,3 +9,19 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+enum OrderStatusEnum {
+  NEW
+  COOKING
+  IN_DELIVERY
+  DELIVERED
+  COMPLETED
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  status OrderStatusEnum
+  persons Int
+  createdAt DateTime
+  updatedStatusAt DateTime
+}

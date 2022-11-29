@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from 'src/dto/create-order.dto';
-import { UpdateOrderDto } from 'src/dto/update-order.dto';
-import { IOrder } from 'src/interfaces/order';
-import { PrismaService } from './prisma.service';
-import { Prisma, Order, OrderStatusEnum } from '@prisma/client';
+import { PrismaService } from 'src/services/prisma.service';
+import { Prisma, OrderStatusEnum } from '@prisma/client';
 
 @Injectable()
 export class OrdersService {
@@ -17,6 +15,7 @@ export class OrdersService {
     orderBy?: Prisma.OrderOrderByWithRelationInput;
   }) {
     const { skip, take, cursor, where, orderBy } = params;
+
     return this.prisma.order.findMany({
       skip,
       take,
@@ -31,23 +30,22 @@ export class OrdersService {
   }
 
   create(order: CreateOrderDto) {
-    const id = Math.random()
-    const newStatus: OrderStatusEnum = 'NEW'
     const newOrder = {
       ...order,
-      id,
-      status: newStatus,
+      status: OrderStatusEnum.NEW,
       createdAt: new Date(),
-      updatedStatusAt: new Date()
-    }
+      updatedStatusAt: new Date(),
+    };
+
     return this.prisma.order.create({ data: newOrder });
   }
 
   update(params: {
-    where: Prisma.OrderWhereUniqueInput; 
+    where: Prisma.OrderWhereUniqueInput;
     data: Prisma.OrderUpdateInput;
   }) {
     const { where, data } = params;
+
     return this.prisma.order.update({
       data,
       where,
@@ -57,6 +55,6 @@ export class OrdersService {
   delete(where: Prisma.OrderWhereUniqueInput) {
     return this.prisma.order.delete({
       where,
-    })
+    });
   }
 }

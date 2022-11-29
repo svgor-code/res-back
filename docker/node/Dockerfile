@@ -4,9 +4,17 @@ WORKDIR /app
 
 COPY package*.json ./
 
+COPY ./prisma ./prisma
+
 RUN npm i -g @nestjs/cli
 
 RUN npm install
+
+RUN npm i -g prisma
+
+RUN npm i -g @prisma/client
+
+RUN prisma generate
 
 EXPOSE 8080
 

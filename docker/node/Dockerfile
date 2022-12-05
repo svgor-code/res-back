@@ -14,7 +14,7 @@ RUN npm i -g prisma
 
 RUN npm i -g @prisma/client
 
-RUN prisma generate
+RUN npx prisma generate
 
 EXPOSE 8080
 

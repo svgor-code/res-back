@@ -18,10 +18,13 @@
 
 1. Клонируем проект ```git clone https://github.com/progitpro/platform-front.git```
 2. Добавляем переменные окружения ```cp .env.sample .env```
+3. В .env подключаем локальный сервер с БД: просто заменяем ```@localhost:3306``` на ```@mysql:3306```
 3. Устанавливаем зависимости локально ```npm install```
 3. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
    ```docker-compose build --pull && docker-compose up -d```
 4. Применяем миграции: ```npx prisma migrate dev```
+
+
 
 ## Команды докера
 (команды выполнять из директории с docker-compose.yml)

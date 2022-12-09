@@ -33,3 +33,25 @@ model User {
   email String
   password String
 }
+
+model Dish {
+    id Int @id @default(autoincrement())
+    name String
+    image String
+    description String
+    foodType DishFoodTypeEnum 
+    price Int
+    weight Int
+    madeFor MadeFor 
+}
+
+enum MadeFor {
+  BREAKFAST
+  LUNCH
+  DINNER
+}
+
+enum DishFoodTypeEnum {
+  VEGETARIAN
+  NON_VEGETARIAN
+}

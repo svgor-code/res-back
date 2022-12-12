@@ -1,38 +1,40 @@
-import { Get, Post, Put, Delete, Param, HttpCode } from '@nestjs/common';
+import { Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { DishService } from 'src/services/dish.service';
+import { Dish as DishModel, Prisma } from '@prisma/client';
 
 @Controller('dish')
 export class DishController {
-  constructor(private dishService: DishService) {}
+  constructor(private readonly dishService: DishService) {}
 
   @Get(':id')
-  @HttpCode(200)
-  get(@Param('id') id: string): string {
-    return `get ${id}`;
+  async get(@Param('id') id: string): Promise<DishModel> {
+    return this.dishService.getOne({ id: Number(id) });
   }
 
   @Get()
-  @HttpCode(200)
-  findAll(): string {
-    return 'findAll';
-  }
-
-  @Put()
-  @HttpCode(200)
-  update(): string {
-    return 'update';
-  }
-
-  @Delete()
-  @HttpCode(200)
-  delete(): string {
-    return 'delete';
+  async findAll(): Promise<DishModel[]> {
+    return this.dishService.getAll({});
   }
 
   @Post()
-  @HttpCode(200)
-  create(): string {
-    return 'create';
+  async create(@Body() сreateDish: Prisma.DishCreateInput): Promise<DishModel> {
+    return this.dishService.create(сreateDish);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() updateDish: Prisma.DishUpdateInput,
+  ): Promise<DishModel> {
+    return this.dishService.update({
+      where: { id: Number(id) },
+      data: updateDish,
+    });
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<DishModel> {
+    return this.dishService.delete({ id: Number(id) });
   }
 }

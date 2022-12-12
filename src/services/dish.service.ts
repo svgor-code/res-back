@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { CreateDishDto } from 'src/dto/create-dish.dto';
 import { PrismaService } from 'src/services/prisma.service';
 
 @Injectable()
@@ -16,7 +15,7 @@ export class DishService {
   }) {
     const { skip, take, cursor, where, orderBy } = params;
 
-    return this.prisma.order.findMany({
+    return this.prisma.dish.findMany({
       skip,
       take,
       cursor,
@@ -25,14 +24,13 @@ export class DishService {
     });
   }
 
-  getOne(userWhereUniqueInput: Prisma.UserWhereUniqueInput) {
-    return this.prisma.user.findUnique({ where: userWhereUniqueInput });
+  getOne(dishWhereUniqueInput: Prisma.DishWhereUniqueInput) {
+    return this.prisma.dish.findUnique({ where: dishWhereUniqueInput });
   }
 
-  // create(dish1: CreateDishDto) {
-  //   const dish
-  //   return this.prisma.dish.create({ data: dish });
-  // }
+  create(dish: Prisma.DishCreateInput) {
+    return this.prisma.dish.create({ data: dish });
+  }
 
   update(params: {
     where: Prisma.DishWhereUniqueInput;

@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE `Dish` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
     `image` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NOT NULL,
     `foodType` ENUM('VEGETARIAN', 'NON_VEGETARIAN') NOT NULL,

@@ -35,14 +35,14 @@ model User {
 }
 
 model Dish {
-    id Int @id @default(autoincrement())
-    name String
-    image String
-    description String
-    foodType DishFoodTypeEnum 
-    price Int
-    weight Int
-    madeFor MadeFor 
+  id Int @id @default(autoincrement())
+  name String
+  image String
+  description String
+  foodType DishFoodTypeEnum 
+  price Int
+  weight Int
+  madeFor MadeFor 
 }
 
 enum MadeFor {

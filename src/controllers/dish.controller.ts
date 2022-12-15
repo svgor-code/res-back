@@ -1,4 +1,4 @@
-import { Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Get, Post, Put, Delete, Param, Body, Query } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { DishService } from 'src/services/dish.service';
 import { Dish as DishModel, Prisma } from '@prisma/client';
@@ -13,8 +13,24 @@ export class DishController {
   }
 
   @Get()
-  async findAll(): Promise<DishModel[]> {
-    return this.dishService.getAll({});
+  async findAll(
+    @Query('skip') skip?: number,
+    @Query('take') take?: number,
+    @Query('cursor') cursor?: any,
+    @Query('where') where?: any,
+    @Query('orderBy') orderBy?: any,
+  ): Promise<DishModel[]> {
+    return this.dishService.getAll({
+      skip: skip ? Number(skip) : undefined,
+      take: take ? Number(take) : undefined,
+      cursor: cursor
+        ? (JSON.parse(cursor) as Prisma.DishWhereUniqueInput)
+        : undefined,
+      where: where ? (JSON.parse(where) as Prisma.DishWhereInput) : undefined,
+      orderBy: orderBy
+        ? (JSON.parse(orderBy) as Prisma.DishOrderByWithRelationInput)
+        : undefined,
+    });
   }
 
   @Post()

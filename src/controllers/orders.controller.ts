@@ -12,7 +12,7 @@ import {
 import { CreateOrderDto } from 'src/dto/create-order.dto';
 import { UpdateOrderDto } from 'src/dto/update-order.dto';
 import { OrdersService } from 'src/services/orders.service';
-import { Order as OrderModel, Prisma } from '@prisma/client';
+import { Order as OrderModel } from '@prisma/client';
 
 @Controller('orders')
 export class OrdersController {
@@ -27,20 +27,16 @@ export class OrdersController {
   async findAll(
     @Query('skip') skip?: number,
     @Query('take') take?: number,
-    @Query('cursor') cursor?: any,
-    @Query('where') where?: any,
-    @Query('orderBy') orderBy?: any,
+    @Query('cursor') cursor?: string,
+    @Query('where') where?: string,
+    @Query('orderBy') orderBy?: string,
   ): Promise<OrderModel[]> {
     return this.ordersService.getAll({
       skip: skip ? Number(skip) : undefined,
       take: take ? Number(take) : undefined,
-      cursor: cursor
-        ? (JSON.parse(cursor) as Prisma.OrderWhereUniqueInput)
-        : undefined,
-      where: where ? (JSON.parse(where) as Prisma.OrderWhereInput) : undefined,
-      orderBy: orderBy
-        ? (JSON.parse(orderBy) as Prisma.OrderOrderByWithRelationInput)
-        : undefined,
+      cursor: cursor ? { id: Number(cursor) } : undefined,
+      where: undefined,
+      orderBy: orderBy ? JSON.parse(orderBy) : undefined,
     });
   }
 
@@ -56,13 +52,13 @@ export class OrdersController {
     @Body() updateOrderDto: UpdateOrderDto,
   ): Promise<OrderModel> {
     return this.ordersService.update({
-      where: { id: +id },
+      where: { id: Number(id) },
       data: updateOrderDto,
     });
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<OrderModel> {
-    return this.ordersService.delete({ id: +id });
+  async delete(@Param('id') id: number): Promise<OrderModel> {
+    return this.ordersService.delete({ id: Number(id) });
   }
 }

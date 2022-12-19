@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateOrderDto } from 'src/dto/create-order.dto';
 import { UpdateOrderDto } from 'src/dto/update-order.dto';
@@ -23,8 +24,20 @@ export class OrdersController {
   }
 
   @Get()
-  async findAll(): Promise<OrderModel[]> {
-    return this.ordersService.getAll({});
+  async findAll(
+    @Query('skip') skip?: number,
+    @Query('take') take?: number,
+    @Query('cursor') cursor?: string,
+    @Query('where') where?: string,
+    @Query('orderBy') orderBy?: string,
+  ): Promise<OrderModel[]> {
+    return this.ordersService.getAll({
+      skip: skip ? Number(skip) : undefined,
+      take: take ? Number(take) : undefined,
+      cursor: cursor ? { id: Number(cursor) } : undefined,
+      where: undefined,
+      orderBy: orderBy ? JSON.parse(orderBy) : undefined,
+    });
   }
 
   @Post()
@@ -39,13 +52,13 @@ export class OrdersController {
     @Body() updateOrderDto: UpdateOrderDto,
   ): Promise<OrderModel> {
     return this.ordersService.update({
-      where: { id: +id },
+      where: { id: Number(id) },
       data: updateOrderDto,
     });
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<OrderModel> {
-    return this.ordersService.delete({ id: +id });
+  async delete(@Param('id') id: number): Promise<OrderModel> {
+    return this.ordersService.delete({ id: Number(id) });
   }
 }

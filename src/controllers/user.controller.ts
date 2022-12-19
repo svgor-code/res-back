@@ -7,11 +7,12 @@ import {
   Param,
   HttpCode,
   Body,
+  Query,
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/dto/сreate-user.dto';
 import { UpdateUserDto } from 'src/dto/update-user.dto';
 import { UserService } from 'src/services/user.service';
-import { User as UserModel } from '@prisma/client';
+import { Prisma, User as UserModel } from '@prisma/client';
 
 @Controller('users')
 export class UserController {
@@ -23,8 +24,24 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<UserModel[]> {
-    return this.userService.getAll({});
+  async findAll(
+    @Query('skip') skip?: number,
+    @Query('take') take?: number,
+    @Query('cursor') cursor?: any,
+    @Query('where') where?: any,
+    @Query('orderBy') orderBy?: any,
+  ): Promise<UserModel[]> {
+    return this.userService.getAll({
+      skip: skip ? Number(skip) : undefined,
+      take: take ? Number(take) : undefined,
+      cursor: cursor
+        ? (JSON.parse(cursor) as Prisma.UserWhereUniqueInput)
+        : undefined,
+      where: where ? (JSON.parse(where) as Prisma.UserWhereInput) : undefined,
+      orderBy: orderBy
+        ? (JSON.parse(orderBy) as Prisma.UserOrderByWithRelationInput)
+        : undefined,
+    });
   }
 
   @Post()

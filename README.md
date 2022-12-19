@@ -21,7 +21,8 @@
 3. Устанавливаем зависимости локально ```npm install```
 3. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
    ```docker-compose build --pull && docker-compose up -d```
-4. Применяем миграции: ```npx prisma migrate dev```
+4. Заходим в контейнер Node.js ```docker exec -it platform-back-node-1 sh```
+5. Применяем миграцию внутри контейнера Node.js ```npx prisma migrate dev```
 
 ## Команды докера
 (команды выполнять из директории с docker-compose.yml)

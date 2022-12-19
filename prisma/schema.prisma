@@ -19,23 +19,45 @@ enum OrderStatusEnum {
 }
 
 model Order {
-  id Int @id @default(autoincrement())
-  status OrderStatusEnum
-  persons Int
-  createdAt DateTime
+  id              Int             @id @default(autoincrement())
+  status          OrderStatusEnum
+  persons         Int
+  createdAt       DateTime
   updatedStatusAt DateTime
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   firstName String
-  lastName String
-  email String
-  password String
+  lastName  String
+  email     String
+  password  String
 }
 
 model Table {
-  id Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   name String
   size Int
+}
+
+model Dish {
+  id          Int              @id @default(autoincrement())
+  name        String
+  image       String
+  description String
+  foodType    DishFoodTypeEnum
+  price       Int
+  weight      Int
+  madeFor     MadeFor
+}
+
+enum MadeFor {
+  BREAKFAST
+  LUNCH
+  DINNER
+}
+
+enum DishFoodTypeEnum {
+  VEGETARIAN
+  NON_VEGETARIAN
 }

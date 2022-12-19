@@ -18,8 +18,8 @@ export class TableController {
   constructor(private tableService: TableService) {}
 
   @Get(':id')
-  async get(@Param('id') id: string): Promise<TableModel> {
-    return this.tableService.getOne({ id: +id });
+  async get(@Param('id') id: number): Promise<TableModel> {
+    return this.tableService.getOne({ id: Number(id) });
   }
 
   @Get()
@@ -39,13 +39,13 @@ export class TableController {
     @Body() updateUserDto: UpdateTableDto,
   ): Promise<TableModel> {
     return this.tableService.update({
-      where: { id: +id },
+      where: { id: Number(id) },
       data: updateUserDto,
     });
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<TableModel> {
-    return this.tableService.delete({ id: +id });
+  async delete(@Param('id') id: number): Promise<TableModel> {
+    return this.tableService.delete({ id: Number(id) });
   }
 }

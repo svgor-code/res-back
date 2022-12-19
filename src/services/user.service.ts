@@ -28,8 +28,8 @@ export class UserService {
     return this.prisma.user.findUnique({ where: userWhereUniqueInput });
   }
 
-  create(order: Prisma.UserCreateInput) {
-    return this.prisma.user.create({ data: order });
+  create(user: Prisma.UserCreateInput) {
+    return this.prisma.user.create({ data: user });
   }
 
   update(params: {

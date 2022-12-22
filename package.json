@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug 0.0.0.0:9229 --watch",
-    "start:migrate:debug": "npx prisma migrate dev && npm run start:debug",
+    "start:migrate:debug": "prisma generate && npx prisma migrate dev && npm run start:debug",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",

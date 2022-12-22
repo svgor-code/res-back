@@ -14,8 +14,6 @@ RUN npm i -g prisma
 
 RUN npm i -g @prisma/client
 
-RUN prisma generate
-
 EXPOSE 8080
 
 CMD ["npm", "run", "start:migrate:debug"]

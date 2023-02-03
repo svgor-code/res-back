@@ -22,6 +22,11 @@
 4. В терминале (для Windows - powershell, для Mac - zshell) вводим команду:
    `docker-compose build --pull && docker-compose up -d`
 
+   !!! ТОЛЬКО ПРИ ПЕРВОМ ЗАПУСКЕ ПРОЕКТА (далее не нужно):
+5. Инициализируем БД: `prisma generate`
+6. Мигрируем БД в контейнер (должен быть запущен Docker + добавлены ENV переменные) `npx prisma migrate dev`
+7. Идём в шаг 4
+
 ## Команды докера
 
 (команды выполнять из директории с docker-compose.yml)

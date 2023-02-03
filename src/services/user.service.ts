@@ -28,6 +28,14 @@ export class UserService {
     return this.prisma.user.findUnique({ where: userWhereUniqueInput });
   }
 
+  getOneByEmail(email: string) {
+    return this.prisma.user.findFirst({
+      where: {
+        email: email,
+      }
+    })
+  }
+
   create(user: Prisma.UserCreateInput) {
     return this.prisma.user.create({ data: user });
   }

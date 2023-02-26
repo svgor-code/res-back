@@ -38,4 +38,20 @@ model Table {
   id Int @id @default(autoincrement())
   name String
   size Int
+  tableBooking TableBooking?
+
+  @@unique([id, size])
+}
+
+model TableBooking {
+  id Int @id @default(autoincrement())
+  from String
+  to String
+  table Table @relation(fields: [tableId, persons], references: [id, size])
+  tableId Int
+  persons Int
+  cause String
+  description String
+
+  @@unique([tableId, persons])
 }

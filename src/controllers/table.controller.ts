@@ -15,7 +15,7 @@ import { Table as TableModel } from '@prisma/client';
 
 @Controller('table')
 export class TableController {
-  constructor(private tableService: TableService) {}
+  constructor(private tableService: TableService) { }
 
   @Get(':id')
   async get(@Param('id') id: string): Promise<TableModel> {

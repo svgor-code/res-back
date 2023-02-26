@@ -15,7 +15,7 @@ import { Prisma, TableBooking as TableBookingModel } from '@prisma/client';
 
 @Controller('table-booking')
 export class TableBookingController {
-  constructor(private tableService: TableBookingService) { }
+  constructor(private tableService: TableBookingService) {}
 
   @Get(':id')
   async get(@Param('id') id: string): Promise<TableBookingModel> {
